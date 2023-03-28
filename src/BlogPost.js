@@ -8,8 +8,8 @@ const BlogPost = () => {
   const blogpost = blogdata.find((post) => post.slug === slug);
 
   const returnToBlog = () => {
-    // navigate("/blog");
-    navigate(-1);
+    navigate("/blog");
+    // navigate(-1);
   };
 
   return (
