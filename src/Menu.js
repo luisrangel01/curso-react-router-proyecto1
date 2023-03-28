@@ -38,7 +38,7 @@ const Menu = () => {
           </NavLink>
         </li> */}
         {routes.map((route) => (
-          <li>
+          <li key={route.to}>
             <NavLink to={route.to} style={textColor}>
               {route.text}
             </NavLink>

@@ -14,9 +14,10 @@ const BlogPage = () => {
   return (
     <>
       <h1>Blog Page</h1>
+
       <ul>
         {blogdata.map((post) => (
-          <BlogLink post={post} />
+          <BlogLink key={post.slug} post={post} />
         ))}
       </ul>
     </>
