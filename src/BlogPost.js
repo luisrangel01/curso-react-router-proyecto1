@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+
 import { useAuth } from "./Context/auth";
 import { DataContext } from "./Context/DataContext";
 
@@ -9,12 +10,11 @@ const BlogPost = () => {
   const auth = useAuth();
   const { createPost, readPost, updatePost, deletePost } =
     useContext(DataContext);
-
+  const location = useLocation();
   const blogPost = readPost(slug);
 
   const returnToBlog = () => {
     navigate("/blog");
-    // navigate(-1);
   };
   const canCreate = auth.user;
 
@@ -46,6 +46,12 @@ const BlogPost = () => {
     returnToBlog();
   };
 
+  const login = () => {
+    navigate("/login", {
+      state: { prevPath: location.pathname },
+    });
+  };
+
   return (
     <>
       <h2>Blog Post</h2>
@@ -57,6 +63,9 @@ const BlogPost = () => {
       {canCreate && <button onClick={addNewPost}>Agregar blogpost</button>}
       {canUpdate && (
         <button onClick={updateCurrentPost}>Actualizar blogpost</button>
+      )}
+      {!auth.user && (
+        <button onClick={login}>Deseas Actualizar este blogpost?</button>
       )}
       {canDelete && (
         <button onClick={deleteCurrentPost}>Eliminar blogpost</button>

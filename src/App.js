@@ -7,7 +7,7 @@ import { BlogPost } from "./BlogPost";
 import { ProfilePage } from "./ProfilePage";
 import { LoginPage } from "./LoginPage";
 import { LogoutPage } from "./LogoutPage";
-import { AuthProvider, useAuth, AuthRoute } from "./Context/auth";
+import { AuthProvider, AuthRoute } from "./Context/auth";
 import { DataProvider } from "./Context/DataContext";
 
 function App() {
