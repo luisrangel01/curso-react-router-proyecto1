@@ -32,14 +32,17 @@ function App() {
                   </AuthRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/profile"
                 element={
                   <AuthRoute>
                     <ProfilePage />
                   </AuthRoute>
                 }
-              />
+              /> */}
+              <Route path="/profile" element={<ProfilePage />}>
+                <Route path=":slug" element={<ProfilePage />} />
+              </Route>
               <Route path="*" element={<p>Not found!</p>} />
             </Routes>
 

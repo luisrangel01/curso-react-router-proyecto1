@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Navigate, useLocation } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 import { users, roles } from "../blogdata";
 
@@ -15,8 +15,11 @@ function AuthProvider({ children }) {
     )
       ? true
       : false;
-
-    setUser({ username, isAdmin });
+    let userData = { name: "", rol: roles.student };
+    if (existsUser(username)) {
+      userData = getPublicData(username);
+    }
+    setUser({ username, isAdmin, ...userData });
 
     if (state) {
       navigate(state.prevPath);
@@ -31,7 +34,15 @@ function AuthProvider({ children }) {
     navigate("/login");
   };
 
-  const auth = { user, login, logout };
+  const existsUser = (username) => {
+    return users.find((user) => user.username === username) ? true : false;
+  };
+
+  const getPublicData = (username) => {
+    return users.find((user) => user.username === username);
+  };
+
+  const auth = { user, login, logout, existsUser, getPublicData };
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
@@ -43,8 +54,6 @@ function useAuth() {
 
 function AuthRoute(props) {
   const auth = useAuth();
-  const location = useLocation();
-  console.log("location", location);
 
   if (!auth.user) {
     return <Navigate to="/login" />;
