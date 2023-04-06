@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-
-const adminList = ["luisrangelc", "kennethrc"];
+import { users, roles } from "../blogdata";
 
 const AuthContext = React.createContext();
 
@@ -11,9 +10,12 @@ function AuthProvider({ children }) {
 
   const login = ({ username }) => {
     // const isAdmin = adminList.find((admin) => admin === username);
-    const isAdmin = adminList.find((admin) => admin === username)
+    const isAdmin = users.find(
+      (user) => user.username === username && user.rol === roles.admin
+    )
       ? true
       : false;
+      console.log({isAdmin})
     setUser({ username, isAdmin });
     navigate("/profile");
   };

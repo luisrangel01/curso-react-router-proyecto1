@@ -1,22 +1,14 @@
-const blogdata = [
-  {
-    title: "Que es React?",
-    slug: "que-es-react",
-    content: "Es el mejor framework de JS",
-    author: "luisrangelc",
-  },
-  {
-    title: "Que es Vue?",
-    slug: "que-es-vue",
-    content: "Es el framework mas versatil de JS",
-    author: "rociorangelp",
-  },
-  {
-    title: "Que es Angular?",
-    slug: "que-es-angular",
-    content: "Es el framework de JS mas usado por las grandes industrias",
-    author: "rodrigorangelc",
-  },
+const roles = {
+  admin: { read: true, write: true, delete: true },
+  editor: { read: true, write: true, delete: true },
+  student: { read: true, write: true, delete: false },
+};
+
+const users = [
+  { username: "luisrangelc", rol: roles.admin },
+  { username: "kennethrc", rol: roles.admin },
+  { username: "rociorangelp", rol: roles.student },
+  { username: "rodrigorangelp", rol: roles.student },
 ];
 
-export { blogdata };
+export { users, roles };

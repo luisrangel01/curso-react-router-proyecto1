@@ -7,41 +7,44 @@ import { BlogPost } from "./BlogPost";
 import { ProfilePage } from "./ProfilePage";
 import { LoginPage } from "./LoginPage";
 import { LogoutPage } from "./LogoutPage";
-import { AuthProvider, useAuth, AuthRoute } from "./auth";
+import { AuthProvider, useAuth, AuthRoute } from "./Context/auth";
+import { DataProvider } from "./Context/DataContext";
 
 function App() {
   return (
     <>
       <HashRouter>
         <AuthProvider>
-          <Menu />
+          <DataProvider>
+            <Menu />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/blog" element={<BlogPage />}>
-              <Route path=":slug" element={<BlogPost />} />
-            </Route>
-            <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/logout"
-              element={
-                <AuthRoute>
-                  <LogoutPage />
-                </AuthRoute>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <AuthRoute>
-                  <ProfilePage />
-                </AuthRoute>
-              }
-            />
-            <Route path="*" element={<p>Not found!</p>} />
-          </Routes>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/blog" element={<BlogPage />}>
+                <Route path=":slug" element={<BlogPost />} />
+              </Route>
+              <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/logout"
+                element={
+                  <AuthRoute>
+                    <LogoutPage />
+                  </AuthRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <AuthRoute>
+                    <ProfilePage />
+                  </AuthRoute>
+                }
+              />
+              <Route path="*" element={<p>Not found!</p>} />
+            </Routes>
 
-          <footer></footer>
+            <footer></footer>
+          </DataProvider>
         </AuthProvider>
       </HashRouter>
     </>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { blogdata } from "./blogdata";
+import { DataContext } from "./Context/DataContext";
 
 const BlogLink = ({ post }) => {
   return (
@@ -11,6 +11,8 @@ const BlogLink = ({ post }) => {
 };
 
 const BlogPage = () => {
+  const { blogData } = useContext(DataContext);
+
   return (
     <>
       <h1>Blog Page</h1>
@@ -18,7 +20,7 @@ const BlogPage = () => {
       <Outlet />
 
       <ul>
-        {blogdata.map((post) => (
+        {blogData.map((post) => (
           <BlogLink key={post.slug} post={post} />
         ))}
       </ul>
